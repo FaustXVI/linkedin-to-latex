@@ -2,3 +2,5 @@
 *.orig
 *.html
 node_modules
+*.tex
+*.pdf

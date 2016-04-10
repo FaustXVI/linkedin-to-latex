@@ -16,13 +16,11 @@
 
 % personal data
 \firstname{ {{= it.firstname}} }
-\familyname{ {{= it.lastname}} }
-\title{Expert Java}       % optional, remove the line if not wanted
-\address{50 boulevard Victor Hugo}{92110 Clichy}    % optional, remove the line if not wanted
-\mobile{06 87 37 34 84}                    % optional, remove the line if not wanted
+\familyname{}
+\title{ {{= it.title}} }       % optional, remove the line if not wanted
 %\phone{phone (optional)}                      % optional, remove the line if not wanted
 %\fax{fax (optional)}                          % optional, remove the line if not wanted
-\email{xavier.detant@gmail.com}                      % optional, remove the line if not wanted
+\email{ {{= it.email}} }                      % optional, remove the line if not wanted
 %\extrainfo{Born on March 10th, 1988 in Toulouse, France\\French, single, no child\\Holder of a French driver's license} % optional, remove the line if not wanted
 
 %\photo[64pt]{picture}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted

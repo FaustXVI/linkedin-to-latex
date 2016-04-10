@@ -24,11 +24,12 @@ jsdom.env({
   done: function (err, window) {
     var $ = window.$;
     var profile = $("#profile");
+    var textOf = function(selector) { return profile.find(selector).text();}
     var tempFn = dot.template(template);
-    var name = $("#name");
     var resultText = tempFn({
-                               firstname : name.text(),
-                               lastname : "Detant"
+                               firstname : textOf("#name"),
+                               title : textOf(".profile-overview-content .title"),
+                               email : "xavier.detant@gmail.com",
                             });
     console.log(resultText);
   }

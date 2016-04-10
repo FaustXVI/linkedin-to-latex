@@ -1,0 +1,17 @@
+{
+  "name": "linkedin-to-tex",
+  "version": "1.0.0",
+  "description": "Transform a linkedin CV to a tex one",
+  "main": "html2Latex.js",
+  "dependencies": {},
+  "devDependencies": {
+    "dot": "^1.0.3",
+    "jquery": "^2.2.3",
+    "jsdom": "^8.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Xavier Detant",
+  "license": "GPL-3.0"
+}

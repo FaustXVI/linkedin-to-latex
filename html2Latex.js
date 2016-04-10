@@ -23,13 +23,52 @@ jsdom.env({
   src: [jquery],
   done: function (err, window) {
     var $ = window.$;
+    var safe = function(elm){ return elm.text().replace(" ","~").trim();}
     var profile = $("#profile");
+    profile.find("br").replaceWith("\\endgraf ")
     var textOf = function(selector) { return profile.find(selector).text();}
+    var summary = function(selector) {
+        var section = profile.find(selector);
+        return {
+            title : safe(section.find(".title")),
+            content : safe(section.find(".description")),
+        }
+     }
+    var section = function(selector, subselector) {
+        var section = profile.find(selector);
+        var items = section.find(subselector).toArray().map(function(li){
+            return {
+                startDate: safe($(li).find(".date-range time:nth(0)")),
+                endDate: safe($(li).find(".date-range time:nth(1)")),
+                title: safe($(li).find(".item-title")),
+                subtitle: safe($(li).find(".item-subtitle")),
+                content: safe($(li).find(".description"))
+            }
+        })
+        return {
+            title : safe(section.children(".title")),
+            items : items
+        }
+     }
+    
     var tempFn = dot.template(template);
     var resultText = tempFn({
                                firstname : textOf("#name"),
                                title : textOf(".profile-overview-content .title"),
                                email : "xavier.detant@gmail.com",
+                               summary : summary("#summary"),
+                               sections : [
+                                            section("#projects",".project"),
+                                            section("#experience",".position"),
+                                            section("#education",".school"),
+                                            section("#volunteering",".position")
+                                          ],
+                               skillsTitle : "Compétences",
+                               skills : profile.find("#skills .skill").filter(function(i,elm){
+                                                return !$(elm).hasClass("see-more") && !$(elm).hasClass("see-less")
+                                        }).toArray().map(function(skill){ 
+                                                return $(skill).text();
+                                        })
                             });
     console.log(resultText);
   }

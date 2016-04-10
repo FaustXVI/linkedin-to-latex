@@ -5,6 +5,17 @@
 %\moderncvtheme[blue]{casual}                 % optional argument are 'blue' (default), 'orange', 'red', 'green', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
 \moderncvtheme[orange]{classic}                % idem
 
+\renewcommand*{\cventry}[7][.25em]{%
+  \cvitem[#1]{#2}{%
+    {\bfseries#3}%
+   \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
+    \ifthenelse{\equal{#5}{}}{}{, #5}%
+    \ifthenelse{\equal{#6}{}}{}{, #6}%
+    \strut%
+    \ifx&#7&%
+      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+
+
 % character encoding
 \usepackage[utf8]{inputenc}                   % replace by the encoding you are using
 
@@ -35,110 +46,19 @@
 \begin{document}
 \maketitle
 
-\section{Résumé}
+\section{ {{= it.summary.title}} }
+{{= it.summary.content}}
 
-Craftsman passionné, j'aide mes clients à assouplir leur SI afin de les rendre plus réactifs au changement tout en étant de meilleure qualité.
-À ce titre, je participe aussi bien à la sélection des outils mis en place qu'à leur mise en place à proprement parler ainsi qu'à la montée en compétences des équipes.
+\section{{{= it.skillsTitle}}}
+{{~ it.skills :skill:i}}{{= skill}}{{? i < it.skills.length - 1}}, {{?}}{{~}}
 
-\section{Cursus professionnel}
+{{~ it.sections :section}}
+\section{ {{= section.title}} }
+    {{~ section.items :item}}
+\cventry{{{= item.startDate}} {{= item.endDate}}}{{{= item.title}}}{{{= item.subtitle}}}{}{}{{{= item.content}}}
+    {{~}}
+{{~}}
 
-\cventry{Depuis 2013}{Expert Java, formateur et responsable de communication technique au sein de \emph{Smile}}{}{}{}{
-\begin{itemize}
-\item Formations internes et externes, technique et théorique comme par exemple :
-    \begin{itemize}
-    \item Coder bien, coder juste
-    \item Optimisation d'une application web
-    \item Tests unitaires, théorie et pratique Java
-    \item Outils système pour dignostiques Java
-    \end{itemize}
-\item Consultant technique en interne
-\item Rédations d'articles sur le blog de \emph{Smile}
-\item Fédération d'un groupe de rédacteurs pour le blog
-\end{itemize}
-}
-\cventry{Depuis 2012}{Tech leader Java et architecte au sein de \emph{Smile}}{}{}{}{
-\begin{itemize}
-\item Initialisation technique des projets
-\item Réalitation de l'architecture technique des projets
-\item Configuration de la plateforme d'intégration continue
-\item Relecture de code
-\end{itemize}
-}
-\cventry{Depuis 2010}{Ingénieur étude et dèveloppement Java au sein de \emph{Smile}}{}{}{}{
-\begin{itemize}
-\item Réalisation de l'intranet de \emph{Generali}
-    \begin{itemize}
-    \item Intégration de \emph{Nuxeo}
-    \item 5 000 utilisateurs quotidiens
-    \item Réalisation du projet en régie
-    \item Développeur au sein d'une équipe de 3 personnes
-    \item Intervention sur tous les aspects de l'application (back-end et front-end)
-    \end{itemize}
-\item Réalisation du site d'inscription de \emph{HEC}
-    \begin{itemize}
-    \item Projet spécifique (Spring, struts2, Hibernate)
-    \item Utilisation poncuelle mais à forte charge
-    \item Réalisation du projet au forfait
-    \item Développeur puis tech-leader d'une équipe de 2 personnes
-    \item Intervention sur tous les aspects de l'application (back-end et front-end)
-    \end{itemize}
-\item Refonte du site de \emph{Belambra}
-    \begin{itemize}
-    \item Projet spécifique (Spring, struts2, Hibernate)
-    \item Site supportant jusqu'à 50 requêtes par secondes
-    \item Réalisation du projet au forfait
-    \item Tech-leader d'une équipe de 2 personnes
-    \item Mise en place de l'architecture du projet et intervention sur tous les aspects de l'application (back-end et front-end)
-    \end{itemize}
-\item Refonte du système de gestion de base de donnée de l'\emph{ONISEP}
-    \begin{itemize}
-    \item Intégration d'\emph{Amethys}
-    \item 150 utilisateurs quotidiens
-    \item Réalisation du projet au forfait
-    \item Tech-leader et unique développeur
-    \end{itemize}
-\end{itemize}
-}
-\cventry{2010}{Stagiaire au sein de \emph{Smile}}{}{}{}{
-\begin{itemize}
-\item Réalisation du système d'e-learning de \emph{HEC}
-    \begin{itemize}
-    \item Intégration de \emph{Nuxeo}
-    \item 1 000 utilisateurs quotidiens
-    \item Réalisation du projet au forfait
-    \item Développeur au sein d'une équipe de 3 personnes
-    \item Intervention sur tous les aspects de l'application (back-end et front-end)
-    \end{itemize}
-\end{itemize}
-}
-\cventry{2009}{Stagiaire au sein du \emph{laboratoire informatique de l'université de Pau et des Pays de l'Adour}}{aide à la réalisation d'un système d'exploitation pour réseau de capteur sans fils nommé Valentine}{}{}{}
-\cventry{2008}{Stagiaire au sein des établissements \emph{LABAT}}{réalisation du site internet}{}{}{}
-
-\section{Cursus scolaire}
-\cventry{2010}{Diplômé d'ingénieurie en informatique à l'\emph{École Internationale des Sciences du Traitement de l'Information} (\href{http://www.eisti.fr}{EISTI})}{option ISICO}{}{}{}
-\cventry{2005}{Baccalauréat S option mathématiques}{mention «assez bien»}{}{}{}
-
-\section{Compétences}
-
-\subsection{Informatique}
-\cvline{Java}{Struts, Spring, Hibernate, JUnit, TestNG, Mockito, EasyMock, Apache commons}
-\cvline{Web}{HTML5, CSS3, JQuery, Esigate, Gatling, JMeter}
-\cvline{Système}{GNU/Linux, LXC, Apache, Tomcat, MySQL}
-\cvline{Conception}{UML et modèles de conception du \emph{«Gang Of Four»}, MERISE}
-\cvline{Outils}{Subversion, Bazaar, Maven, Eclipse}
-
-\subsection{Gestion de projets}
-\cvline{Méthodes}{SCRUM}
-\cvline{Outils}{Redmine, Chiliproject, Continuum, Jenkins}
-
-\subsection{Langues}
-\cvline{Anglais}{Courant}
-\cvline{Espagnol}{Lu, parlé, écrit}
-
-\section{Autres activitées}
-\cvline{Logiciel libre}{Membre actif de l'APRIL et d'Ubuntu-fr}
-\cvline{Basket-ball}{Joueur et entraîneur}
-\cvline{Escalade}{Pratique régulière}
 
 \end{document}
 
